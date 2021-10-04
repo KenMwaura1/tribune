@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% if title %}
+        <title>Zoo Tribune - {{title}}</title>
+    {% else %}
+        <title> Zoo Tribune </title>
+    {% endif %}
+    {% block styles %}
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.2/dist/full.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="{% static 'css/basenews.css'%}">
+    {% endblock %}
+
+</head>
+<body>
+    {% include "navbar.html" %}
+{% block content %}
+    <h1 class="text-center">News for {{date|date:"l d-F Y"}}</h1>
+{%endblock%}
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+{% endblock %}
+</body>
+</html>
