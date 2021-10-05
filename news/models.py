@@ -1,13 +1,13 @@
 from django.db import models
 
-# Create your models here.
-from django.template.defaultfilters import first
 
+# Create your models here.
 
 class Editor(models.Model):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     email = models.EmailField()
+    phone_number = models.CharField(max_length=10, blank=True)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
