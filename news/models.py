@@ -1,6 +1,5 @@
 from django.db import models
-
-
+import datetime as dt
 # Create your models here.
 
 class Editor(models.Model):
@@ -51,3 +50,13 @@ class Article(models.Model):
     editor = models.ForeignKey(Editor, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tags)
     pub_date = models.DateField(auto_now_add=True)
+
+    @classmethod
+    def todays_news(cls):
+        today = dt.date.today()
+        return cls.objects.filter(pub_date=today)
+
+    @classmethod
+    def days_news(cls, date):
+        return cls.objects.filter(pub_date=date)
+
