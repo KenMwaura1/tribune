@@ -21,3 +21,18 @@ class EditorTestClass(TestCase):
         self.zoo.delete_editor()
         editors = self.zoo.show_all_editors()
         self.assertTrue(len(editors) == 0)
+
+    def test_update_first_name(self):
+        self.zoo.save_editor()
+        self.zoo.update_editor_first_name("Ken")
+        self.assertTrue(self.zoo.first_name == "Ken")
+
+    def test_update_last_name(self):
+        self.zoo.save_editor()
+        self.zoo.update_editor_last_name("Mwaura")
+        self.assertTrue(self.zoo.last_name == "Mwaura")
+
+    def test_update_email(self):
+        self.zoo.save_editor()
+        self.zoo.update_editor_email("kemwaura@gmail.com")
+        self.assertTrue(self.zoo.email == "kemwaura@gmail.com")
