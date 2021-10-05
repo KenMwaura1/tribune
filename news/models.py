@@ -25,6 +25,18 @@ class Editor(models.Model):
     def show_all_editors():
         return Editor.objects.all()
 
+    def update_editor_first_name(self, value):
+        self.first_name = value
+        self.save_editor()
+
+    def update_editor_last_name(self, value):
+        self.last_name = value
+        self.save_editor()
+
+    def update_editor_email(self, value):
+        self.email = value
+        self.save_editor()
+
 
 class Tags(models.Model):
     name = models.CharField(max_length=30)
@@ -39,5 +51,3 @@ class Article(models.Model):
     editor = models.ForeignKey(Editor, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tags)
     pub_date = models.DateField(auto_now_add=True)
-
-
