@@ -1,4 +1,4 @@
-# Zoo z-tribune
+# Zoo tribune
 simple Django news web app 
 
 ## Technologies used
