@@ -12,7 +12,7 @@ jobs:
       matrix:
         python-version: [ 3.6, 3.7, 3.8, 3.9]
         database-name:
-          - zoo-zoo-tribune-test
+          - zoo-tribune-test
         database-password:
           - postgres
         database-user:
