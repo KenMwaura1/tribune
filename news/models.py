@@ -1,5 +1,7 @@
 from django.db import models
 import datetime as dt
+
+
 # Create your models here.
 
 class Editor(models.Model):
@@ -64,3 +66,8 @@ class Article(models.Model):
     @classmethod
     def search_by_title(cls, search_term):
         return cls.objects.filter(title__icontains=search_term)
+
+
+class NewsLetterRecipients(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
