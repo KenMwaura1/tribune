@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import render, redirect
 
+from .forms import NewsLetterForm
 from .models import Article
 
 
@@ -14,7 +15,13 @@ def welcome(request):
 def news_of_day(request):
     date = dt.date.today()
     news = Article.todays_news()
-    return render(request, 'all-news/today-news.html', {'date': date, "news": news})
+    if request.method == 'POST':
+        form = NewsLetterForm(request.POST)
+        if form.is_valid():
+            print('valid')
+    else:
+        form = NewsLetterForm()
+    return render(request, 'all-news/today-news.html', {'date': date, "news": news, "letterForm": form})
 
 
 def convert_dates(dates):
