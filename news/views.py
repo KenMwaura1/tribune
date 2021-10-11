@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
+from .email import send_welcome_email
 from .forms import NewsLetterForm
 from .models import Article, NewsLetterRecipients
 
@@ -22,6 +23,7 @@ def news_of_day(request):
             email = form.cleaned_data['email']
             recipient = NewsLetterRecipients(name=name, email=email)
             recipient.save()
+            send_welcome_email(name, email)
             HttpResponseRedirect('news_of_day')
             print('valid')
     else:
