@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1> Welcome to zoo tribune</h1>
+{%extends 'all-news/base.html'%}
+{% load bootstrap5 %}
+{% block content %}
+    {{ block.super}}
 
-</body>
-</html>
+    <div class="container">
+    <h2> Konichiwa, Welcome to Zoo Tribune</h2>
+    <br />
+    <a class="btn btn-primary" href="{%  url 'newsToday' %}"> Go to Today's news</a>
+
+    </div>
+
+
+{% endblock %}
