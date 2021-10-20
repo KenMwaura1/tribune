@@ -73,3 +73,9 @@ class Article(models.Model):
 class NewsLetterRecipients(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
+
+
+class ZooMerch(models.Model):
+    name = models.CharField(max_length=40)
+    description = models.TextField()
+    price = models.DecimalField(decimal_places=2, max_digits=20)
