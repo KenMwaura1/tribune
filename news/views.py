@@ -1,15 +1,23 @@
 import datetime as dt
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from rest_framework import status
+from rest_framework.decorators import permission_classes
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .email import send_welcome_email
 from .forms import NewsLetterForm, NewArticleForm
-from .models import Article, NewsLetterRecipients
-
+from .models import Article, NewsLetterRecipients, ZooMerch
 
 # Create your views here.
+from .permissions import IsAdminOrReadOnly
+from .serializer import MerchSerializer
+
+
 def welcome(request):
     return render(request, 'welcome.html')
 
@@ -96,3 +104,21 @@ def new_article(request):
     else:
         form = NewArticleForm()
     return render(request, 'new_article.html', {"form": form})
+
+
+class MerchList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+
+    def get(self, request, format=None):
+        all_merch = ZooMerch.objects.all()
+        serializers = MerchSerializer(all_merch, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = MerchSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+

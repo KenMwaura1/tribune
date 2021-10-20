@@ -1,8 +1,10 @@
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token
 
 from . import views
+
 
 urlpatterns = [
     url(r'^$', views.welcome, name='home'),
@@ -11,7 +13,9 @@ urlpatterns = [
     url(r'^search/', views.search_results, name='search_results'),
     url(r'^article/(\d+)', views.article, name='article'),
     url(r'^new/article$', views.new_article, name='new-article'),
-    url(r'^ajax/newsletter/$', views.newsletter, name='newsletter')
+    url(r'^ajax/newsletter/$', views.newsletter, name='newsletter'),
+    url(r'^api/merch/$', views.MerchList.as_view()),
+    url(r'^api-token-auth/', obtain_auth_token)
 ]
 
 if settings.DEBUG:
