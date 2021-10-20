@@ -12,6 +12,7 @@ django-bootstrap-v5==1.0.5
 django-on-heroku==1.1.2
 django-registration==3.2
 django-tinymce==3.3.0
+djangorestframework==3.12.4
 gunicorn==20.1.0
 idna==3.2
 multidict==5.2.0
