@@ -15,7 +15,8 @@ urlpatterns = [
     url(r'^new/article$', views.new_article, name='new-article'),
     url(r'^ajax/newsletter/$', views.newsletter, name='newsletter'),
     url(r'^api/merch/$', views.MerchList.as_view()),
-    url(r'^api-token-auth/', obtain_auth_token)
+    url(r'^api-token-auth/', obtain_auth_token),
+    url(r'api/merch/merch-id/(?P<pk>[0-9]+)/$', views.MerchDescription.as_view())
 ]
 
 if settings.DEBUG:

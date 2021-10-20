@@ -122,3 +122,18 @@ class MerchList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class MerchDescription(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+
+    def get_merch(self, pk):
+        try:
+            return ZooMerch.objects.get(pk=pk)
+        except ZooMerch.DoesNotExist:
+            return Http404
+
+    def get(self, request, pk, format=None):
+        merch = self.get_merch(pk)
+        serializers = MerchSerializer(merch)
+        return Response(serializers.data)
+
+
