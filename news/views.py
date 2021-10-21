@@ -4,7 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -26,6 +26,7 @@ def news_of_day(request):
     date = dt.date.today()
     news = Article.todays_news()
     form = NewsLetterForm()
+    new = Article.objects.filter()
     return render(request, 'all-news/today-news.html', {"date": date, "news": news, "letterForm": form})
 
 
@@ -120,6 +121,15 @@ class MerchList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MerchViewSet(viewsets.ModelViewSet):
+    """
+    Api endpoint that allows merch to be viewed or edited
+    """
+    queryset = ZooMerch.objects.all().order_by('id')
+    serializer = MerchSerializer
+    # permission_classes = (IsAdminOrReadOnly)
 
 
 class MerchDescription(APIView):

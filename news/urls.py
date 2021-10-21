@@ -1,10 +1,14 @@
 from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path, include
 from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework import routers
 
 from . import views
 
+router = routers.DefaultRouter()
+router.register(r'merch', views.MerchViewSet)
 
 urlpatterns = [
     url(r'^$', views.welcome, name='home'),
@@ -16,7 +20,9 @@ urlpatterns = [
     url(r'^ajax/newsletter/$', views.newsletter, name='newsletter'),
     url(r'^api/merch/$', views.MerchList.as_view()),
     url(r'^api-token-auth/', obtain_auth_token),
-    url(r'api/merch/merch-id/(?P<pk>[0-9]+)/$', views.MerchDescription.as_view())
+    url(r'api/merch/merch-id/(?P<pk>[0-9]+)/$', views.MerchDescription.as_view()),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # url(r'^api/editor/$', views.MerchList.as_view())
 ]
 
 if settings.DEBUG:
