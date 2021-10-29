@@ -73,7 +73,6 @@ jobs:
         export SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://${{ matrix.database-user }}:${{ matrix.database-password }}@${{ matrix.database-host }}:${{ matrix.database-port }}/${{ matrix.database-name }}
         export SECRET_KEY=test-secret-key
         python manage.py migrate
-        python manage.py test news
 
 
 
